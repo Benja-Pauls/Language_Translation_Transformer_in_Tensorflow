@@ -1,14 +1,21 @@
 # Language_Translation_Transformer_in_Tensorflow
+**Ben Paulson & John Cisler**
+
 Transformer architecture made in tensorflow to be applied towards an NLP problem: language translation. Made following a guide online (https://www.tensorflow.org/text/tutorials/transformer) while adding additional documentation throughout the notebook for beginners to understand these advanced concepts, as well as adding docstrings.
 
 Developed for personal learning as well as outlining these concepts (NLP, Self-Attention, Transformers) to other students in Milwaukee School of Engineering's "Intro to Artificial Intelligence" course.
 
+
 # Get Started Guide (PT to EN)
-- Download Repo
-- See Transformer breakdown in Jupyter-Notebook file (`.ipynb`) of "Portuguese_to_English" file
-- Feel free to adjust the notebook to match your implementation/context
-- Convert the Notebook (`.ipynb`) to Python (`.py`) running the command: `bash topy.sh <ipynb_filename>.ipynb`. `topy.sh` is provided.
-- Run `.sh` file provided, changing file name of `.py` file to run (matching result of `bash topy.sh <ipynb_filename>.ipynb`) and any hyperparameters processed by `argparse` within the Python file
+- Download Git Repository for zip file
+- **Compile the Model Yourself Route (Jupyter):**
+    - See Transformer breakdown in Jupyter-Notebook file (`.ipynb`) of "Portuguese_to_English" file
+    - Feel free to adjust the notebook to match your implementation/context
+    - Follow the in-notebook instructions on how to perform the implementation
+- **Train the Model on Linux System (ROSIE):**
+      - **Option 1:** Convert the Notebook (`.ipynb`) to Python (`.py`) running the command: `bash topy.sh <ipynb_filename>.ipynb`. `topy.sh` is provided. Run `tf_transformer_batched.sh` after changing the srun command within the `.sh` script to match the name of your newly-generated `.py` file, as well as any hyperparameters you would like to specify and have processed by `argparse` within the Python file.
+      - **Option 2:** Run the existing `tf_transformer_batched.sh`, this will run the existing `First_Type_4L_20E_8H.py` which has 4 encoder/decoder layers and 8 heads for the multi-headed attention mechanisms. The model will train for 20 epochs and will output weights and a graphic each 10 save iterations.
+
 
 # Get Started Guide (EN to FR)
 - Uses HuggingFace transformer (pre-trained T5), requiring a HuggingFace account.
