@@ -699,10 +699,13 @@ if EXP_FOLDER is not None:
             self.current_epoch = epoch
             if epoch%save_iterations == 0: # Only save/display on save iterations
                 # Save the model at epoch
-                v_loss=logs.get('val_loss') 
-                name= "Epoch" + str(epoch) +'-' + str(v_loss)[:str(v_loss).rfind('.')+3] + '.h5'
-                file_id=os.path.join(self.filepath, name)
-                self.model.save(file_id)
+#                 v_loss=logs.get('val_loss') 
+#                 name= "Epoch" + str(epoch) +'-' + str(v_loss)[:str(v_loss).rfind('.')+3] + '.h5'
+#                 file_id=os.path.join(self.filepath, name)
+#                 self.model.save(file_id)
+                name = 'Transformer_Weights_Epoch' + str(self.current_epoch) + '.h5'
+                file_id = os.path.join(self.filepath, name)
+                self.model.save_weights(file_id)
                 
                 # Display a loss plot
                 self.losses.append(logs.get('val_loss'))
@@ -719,15 +722,15 @@ if EXP_FOLDER is not None:
             plt.ylabel('Loss')
             
             # Save the plot for later viewing
-            plot_name = str(epoch) + 'Epoch_Loss_Plot.png'
-            plt.savefig(EXP_FOLDER + '/' + file_name)
+            plot_name = str(self.current_epoch) + 'Epoch_Loss_Plot.png'
+            plt.savefig(EXP_FOLDER + '/' + plot_name)
                 
     save_dir=EXP_FOLDER
     callbacks=[model_per_epoch(transformer, save_dir)]
 
 
 # **Custom Scheduler**<br/>
-# Based on the "Attention Is All You Need" paper, they used a custom scheduler for their learning rate which consisted of a warm-up period before cooling down as the model converged. The purpose of the warm-up period is so the model can avoid drastic changes during the cruic
+# Based on the "Attention Is All You Need" paper, they used a custom scheduler for their learning rate which consisted of a warm-up period before cooling down as the model converged. The purpose of the warm-up period is so the model can avoid drastic changes during the crucial first stages of developing the weights.
 
 class CustomSchedule(tf.keras.optimizers.schedules.LearningRateSchedule):
     def __init__(self, d_model, warmup_steps=4000):
